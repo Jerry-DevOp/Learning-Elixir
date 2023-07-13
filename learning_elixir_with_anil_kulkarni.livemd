@@ -238,3 +238,33 @@ rest2
 <<head::binary-size(2), rest3::binary>> = name
 rest3
 ```
+
+## Charlist
+
+```elixir
+# char value use single qoutation
+# marks
+# Charlist is a list
+char = 'Hello'
+```
+
+```elixir
+# adding two list together
+# use ++
+chars = char ++ ' Jerry'
+chars
+```
+
+```elixir
+# function to check if a variable
+# is a List
+is_list(char)
+```
+
+## Process
+
+```elixir
+# check the current process
+my_pid = self()
+my_pid
+```
