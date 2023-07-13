@@ -278,6 +278,7 @@ my_pid
 # single linked list
 # this because linked list
 # are recursive
+# list use square []
 list = ["a", "c", "b"]
 list
 ```
@@ -332,4 +333,34 @@ tl(list)
 # h for head and t for
 # the remaining values
 t
+```
+
+## Tuples
+
+```elixir
+# similar to arrays
+# do not use more than 3 variables
+# tuple uses curly {}
+{e, b} = {5, 6}
+b
+```
+
+```elixir
+{:response, message, state} = {:response, "found it", ["Morning", "afternoon", "Evening"]}
+state
+```
+
+## Keyword List
+
+```elixir
+# has key and value pair
+data = [w: 7, q: 8]
+# this is similar to
+# [{:w, 7}]= [w: 7]
+```
+
+```elixir
+# to check keyword methods
+# go to iexand type "keyword."
+data[:q]
 ```
