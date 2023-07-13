@@ -1,0 +1,51 @@
+# Learning Elixir with Anil Kulkarni
+
+## Fuctional Programming
+
+```elixir
+# Elixir
+# immutable
+# supports fault tolerance
+# functional Programming
+# x---->f(x)---->y
+# no classes
+# no for loops it uses Recursion
+```
+
+## Reccursion
+
+```elixir
+# Recursion + mutation
+# Recursion repeating the same habits
+# mutation change in habbit once in a while
+# Example the universe is in a state of
+# Expansion
+defmodule Universe do
+  def big_bang do
+    IO.puts("Big Bang")
+    Process.sleep(1000)
+    expand()
+  end
+
+  def expand(state \\ 0) do
+    IO.puts("Size of Universe is :#{state}")
+    Process.sleep(1000)
+    expand(state + 1)
+    # state + 1 represents mutation 
+  end
+end
+
+# call the function
+# Universe.big_bang()
+```
+
+## Learning and Unlearning
+
+```elixir
+a = 1
+# a is not being asigned to 1
+# rather we use
+# left hand side = Right hand Side
+# Therefore "="means pattern matching
+# So we are matching LSH to RHS
+```
