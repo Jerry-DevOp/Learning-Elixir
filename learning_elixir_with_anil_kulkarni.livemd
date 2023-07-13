@@ -173,7 +173,7 @@ Hi.earth("Jerry")
 # structure of an Atom
 # :some_name 0r :"Some Name"
 :error
-{:error, reason} = {:error, "fil enot found"}
+{:error, reason} = {:error, "fil not found "}
 ```
 
 ```elixir
@@ -187,4 +187,5 @@ reason
 # use double qoutes
 "Lebogang"
 i("Lebogang")
+:do
 ```
