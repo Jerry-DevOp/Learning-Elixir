@@ -267,4 +267,69 @@ is_list(char)
 # check the current process
 my_pid = self()
 my_pid
+# check pid on iex 
+# self()
+```
+
+## Lists
+
+```elixir
+# lists in elixir are
+# single linked list
+# this because linked list
+# are recursive
+list = ["a", "c", "b"]
+list
+```
+
+```elixir
+# since we cannot use list[0]
+# to show the first valuein 
+# the list we use Enum
+Enum.at(list, 0)
+# Enum is a built in module
+# at() is a function in Enum
+```
+
+```elixir
+# to understand what the 
+# Enum function do
+# you can go to iex and type Enum
+# you can also use 
+# h "nameofmodule"."function"
+```
+
+```elixir
+[first, second, third] = list
+# this is similar to
+# [first, second, third] = 
+# ["a", "b", "c"]
+first
+```
+
+```elixir
+# to skip some values you can
+# use _,
+[_, _, third] = ["a", "b", "c"]
+third
+```
+
+```elixir
+# function to show the first value
+# or head in a list
+hd(list)
+```
+
+```elixir
+# function to show the values 
+# after head in a list
+tl(list)
+```
+
+```elixir
+# another method is 
+[h | t] = list
+# h for head and t for
+# the remaining values
+t
 ```
