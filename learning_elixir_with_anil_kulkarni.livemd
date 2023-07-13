@@ -172,8 +172,10 @@ Hi.earth("Jerry")
 ```elixir
 # structure of an Atom
 # :some_name 0r :"Some Name"
+# symbols that value of their own
+# name
 :error
-{:error, reason} = {:error, "fil not found "}
+{:error, reason} = {:error, "file not found "}
 ```
 
 ```elixir
@@ -185,7 +187,54 @@ reason
 
 ```elixir
 # use double qoutes
-"Lebogang"
-i("Lebogang")
-:do
+lebo = "Lebogang"
+# on the iex terminal you use "i"
+# to check which data a variable
+# is
+# i("Lebogang")
+# i shows the data type,Bytes,
+# and raw representation
+# On livebook you use is_binary()
+is_binary(lebo)
+```
+
+```elixir
+# to add two strings together
+# Use "<>"
+example = "Hello " <> lebo
+example
+```
+
+```elixir
+"J" <> rest = "Jerry"
+rest
+```
+
+```elixir
+# pattern on raw string
+<<head, rest1::binary>> = name
+head
+```
+
+```elixir
+# check if the value of the head
+# is equal to j
+head == ?j
+# therefore 106 is a 
+# raw reprecentation of 'j"
+```
+
+```elixir
+rest1
+```
+
+```elixir
+<<"je", rest2::binary>> = name
+rest2
+```
+
+```elixir
+# or
+<<head::binary-size(2), rest3::binary>> = name
+rest3
 ```
