@@ -361,6 +361,68 @@ data = [w: 7, q: 8]
 
 ```elixir
 # to check keyword methods
-# go to iexand type "keyword."
+# go to iex and type "keyword."
 data[:q]
+```
+
+## Maps
+
+```elixir
+# map uses %
+# more like dictionaries
+my_map = %{a: 1, q: 8, w: 7}
+```
+
+```elixir
+%{a: first, q: second, w: third} = my_map
+second
+```
+
+```elixir
+# the advantage of a map is 
+# it allows you to focus on one
+# key
+%{w: third} = my_map
+third
+```
+
+```elixir
+my_map.q
+# this notation cannot be used
+# with strings
+```
+
+```elixir
+map2 = %{"a" => 1, "q" => 8, "w" => 7}
+# we use => when using strings
+```
+
+```elixir
+%{"w" => w} = map2
+w
+# to check methods that go with 
+# maps go to iex type "map."
+```
+
+```elixir
+# update a value in a map2
+map2 = %{map2 | "w" => 10}
+```
+
+## Struct
+
+```elixir
+# uses model
+# micro
+defmodule User2 do
+  # Without initializaton
+  # defstruct :username, :email,:age
+  # write this way with initialization
+  defstruct username: "", email: "", age: nil
+end
+```
+
+```elixir
+# to add values to a struct
+%User2{username: "jeremiah", age: 24, email: "jerrynkutshweu@gmail.com"}
 ```
