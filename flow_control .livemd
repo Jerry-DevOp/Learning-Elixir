@@ -65,6 +65,20 @@ cond do
 end
 ```
 
-```elixir
+## If/Else Statement
 
+```elixir
+if true do
+  "This will work"
+else
+  "Else this will work"
+end
+```
+
+```elixir
+if false do
+  "This will work"
+else
+  "Else this will work"
+end
 ```
