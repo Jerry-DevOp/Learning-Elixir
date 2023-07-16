@@ -2,6 +2,20 @@
 
 ## Fuctional Programming
 
+### Elixir
+
+### immutable
+
+### supports fault tolerance
+
+### functional Programming
+
+### x---->f(x)---->y
+
+### no classes
+
+### no for loops it uses Recursion
+
 ```elixir
 # Elixir
 # immutable

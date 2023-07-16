@@ -1,6 +1,69 @@
-# Flow Control
+# Flow Control Mechanism
 
-## Section
+## Case
+
+```elixir
+# case ststement
+list = [1, 2, 3]
+```
+
+```elixir
+# fetch the second nuber 
+# and check the condition
+case Enum.at(list, 2) do
+  1 -> "This won't print"
+  3 -> "3 is a match!"
+  _ -> "Catch all"
+end
+```
+
+## Struct
+
+```elixir
+# this is a struct
+defmodule Post do
+  defstruct(
+    id: nil,
+    title: "",
+    description: "",
+    author: ""
+  )
+end
+```
+
+```elixir
+post1 = %Post{id: 1, title: "Nothing", author: "Jerry Padawan"}
+```
+
+```elixir
+case post1 do
+  %{author: "Octallium"} -> "Got a post from Octallium"
+  %{author: "JP"} -> "Got a post from JP"
+  _ -> "Got a post from #{post1.author} "
+end
+```
+
+```elixir
+# to change author
+# post1 = %{post1 | author: "JP"}
+```
+
+## Cond
+
+```elixir
+cond do
+  post1.author == "Octallium" -> "Eitting a post from Octallium"
+  post1.author == "JP" -> "Eitting a post from JP"
+  true -> "This is a catch all"
+end
+```
+
+```elixir
+cond do
+  hd(list) == 1 -> "Got a 1"
+  true -> "Head is #{hd(list)}"
+end
+```
 
 ```elixir
 
