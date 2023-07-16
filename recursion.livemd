@@ -73,3 +73,18 @@ Factorial1.of_tail_rec(5)
 ```
 
 ## Reverse Number
+
+```elixir
+defmodule Reverse do
+  def of_reverse(num5, acc3 \\ 0)
+  def of_reverse(0, acc3), do: acc3
+
+  def of_reverse(num5, acc3) do
+    new_num = div(num5, 10)
+    new_acc = acc3 * 10 + rem(num5, 10)
+    of_reverse(new_num, new_acc)
+  end
+end
+
+Reverse.of_reverse(652)
+```
