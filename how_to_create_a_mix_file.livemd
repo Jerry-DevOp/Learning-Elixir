@@ -1,0 +1,13 @@
+# How to create a mix file
+
+## Terminal
+
+```elixir
+# Open git hub
+# create a directory
+# -> mkdir "folder name"
+# create a mix
+# -> mix new "name of mix"
+# cd "mix folder"
+# code ./ to open mix project
+```
