@@ -1,0 +1,75 @@
+# Recursion
+
+```elixir
+defmodule Recursion do
+  def upto(0) do
+    :ok
+  end
+
+  def upto(nums) do
+    IO.puts(nums)
+    upto(nums - 1)
+  end
+end
+
+Recursion.upto(3)
+```
+
+## sum of digits
+
+```elixir
+defmodule SumDigits do
+  def adding(0), do: 0
+
+  def adding(num) do
+    num + adding(num - 1)
+  end
+end
+
+SumDigits.adding(3)
+```
+
+## Sum digits
+
+```elixir
+defmodule SumDigits2 do
+  def adding2(0), do: 0
+
+  def adding2(num2) do
+    adding_tail_rec(num2)
+  end
+
+  def adding_tail_rec(num2, acc \\ 0)
+  def adding_tail_rec(0, acc), do: acc
+
+  def adding_tail_rec(num2, acc) do
+    adding_tail_rec(num2 - 1, acc + num2)
+  end
+end
+
+SumDigits2.adding_tail_rec(3)
+```
+
+## Factorial
+
+```elixir
+defmodule Factorial do
+  def of(1), do: 1
+  def of(num3), do: num3 * of(num3 - 1)
+end
+
+Factorial.of(5)
+```
+
+```elixir
+# tail recursion
+defmodule Factorial1 do
+  def of_tail_rec(num4, acc2 \\ 1)
+  def of_tail_rec(1, acc2), do: acc2
+  def of_tail_rec(num4, acc2), do: of_tail_rec(num4 - 1, acc2 * num4)
+end
+
+Factorial1.of_tail_rec(5)
+```
+
+## Reverse Number
