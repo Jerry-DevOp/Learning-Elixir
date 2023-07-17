@@ -42,6 +42,7 @@ RevList.reverse([1, 2, 3])
 
 ```elixir
 defmodule MapThis do
+  @spec map([any()], (any() -> any()), [any()]) :: [any()]
   def map(elements, func, acc \\ [])
   def map([], _, acc), do: acc
   def map([h | t], func, acc), do: map(t, func, [func.(h) | acc])
@@ -70,4 +71,32 @@ MapThis.map([1, 2, 3], fn x -> x * 2 end) |> RevList.reverse()
 [1, 2, 3, 4] |> MapThis.map(fn x -> x * 2 end) |> Enum.reverse()
 ```
 
-## Section
+## Concat
+
+```elixir
+# add two list together
+[1, 2, 3] ++ [4, 5, 6]
+```
+
+```elixir
+defmodule Concating do
+  @spec concat([any()], [any()]) :: [any()]
+  def concat(src, dst), do: concat_fun(src |> RevList.reverse(), dst)
+  def concat_fun([], dst), do: dst
+  def concat_fun([h | t], dst), do: concat_fun(t, [h | dst])
+end
+
+Concating.concat([1, 2, 3], [4, 5, 6])
+```
+
+## Flat Map
+
+```elixir
+defmodule FlapMap do
+  def flat_map(elements, func3, acc2 \\ [])
+  def flat_map([], _, acc2), do: acc2
+  def flat_map([h | t], func3, acc2), do: flat_map(t, func3, Concating.concat(acc2, func3.(h)))
+end
+
+FlapMap.flat_map([:a, :b, :c], fn x -> [x, x] end)
+```
