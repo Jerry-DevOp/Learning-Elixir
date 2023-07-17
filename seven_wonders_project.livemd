@@ -50,6 +50,22 @@ defmodule SevenWonders do
     wonders
     |> Enum.sort(fn x, y -> String.length(x.country) < String.length(y.country) end)
   end
+
+  def name_country_list(wonders) do
+    wonders
+    |> Enum.reduce([], fn wonder, acc -> [[wonder.name, wonder.country] | acc] end)
+  end
+
+  def country_name_keyword_lis(wonders) do
+    wonders
+    |> Enum.reduce([], fn wonder, acc -> [{String.to_atom(wonder.name), wonder.country} | acc] end)
+  end
+
+  # ===============================For=================================================================
+
+  def all_names(wonders) do
+    for %{name: name} <- wonders, do: name
+  end
 end
 
 all_seven = SevenWonders.all()
@@ -75,4 +91,22 @@ SevenWonders.in_countries_start_with_i(all_seven)
 
 ```elixir
 SevenWonders.sort_country_by_length(all_seven)
+```
+
+```elixir
+SevenWonders.name_country_list(all_seven)
+```
+
+```elixir
+SevenWonders.country_name_keyword_lis(all_seven)
+```
+
+```elixir
+SevenWonders.all_names(all_seven)
+```
+
+## Expense
+
+```elixir
+
 ```
