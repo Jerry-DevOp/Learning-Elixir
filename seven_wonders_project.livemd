@@ -1,0 +1,48 @@
+# Seven wonders Project
+
+## Struct
+
+```elixir
+defmodule SevenWonders do
+  defstruct name: "", country: ""
+
+  @type t :: %SevenWonders{
+          name: String.t(),
+          country: String.t()
+        }
+  # ================================================================
+  @spec all :: [t()]
+  def all() do
+    [
+      %SevenWonders{name: "The Great Pyramid of Giza", country: "Egypt"},
+      %SevenWonders{name: "The Great Wall Of China", country: "China"},
+      %SevenWonders{name: "Petra", country: "Jordan"},
+      %SevenWonders{name: "Christ the Redeemer", country: "Brazil"},
+      %SevenWonders{name: "Machu Picchu", country: "Peru"},
+      %SevenWonders{name: "Chichen Itza", country: "Mexico."},
+      %SevenWonders{name: "Colosseum", country: " Italy"},
+      %SevenWonders{name: "Taj Mahal", country: " India"}
+    ]
+  end
+
+  # ================================================================
+  @spec print_names([t()]) :: :ok
+  def print_names(wonders) do
+    wonders
+    |> Enum.each(fn %{name: name} -> IO.puts(name) end)
+  end
+
+  def filter_country(wonders, country) do
+    wonders
+    |> Enum.filter(fn %{country: country_name} -> country_name == country end)
+  end
+end
+
+all_seven = SevenWonders.all()
+```
+
+## Print name function
+
+```elixir
+SevenWonders.print_names(all_seven)
+```
