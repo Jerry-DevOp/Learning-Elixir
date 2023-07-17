@@ -2,6 +2,8 @@
 
 ## Struct
 
+<!-- livebook:{"reevaluate_automatically":true} -->
+
 ```elixir
 defmodule SevenWonders do
   defstruct name: "", country: ""
@@ -19,9 +21,9 @@ defmodule SevenWonders do
       %SevenWonders{name: "Petra", country: "Jordan"},
       %SevenWonders{name: "Christ the Redeemer", country: "Brazil"},
       %SevenWonders{name: "Machu Picchu", country: "Peru"},
-      %SevenWonders{name: "Chichen Itza", country: "Mexico."},
-      %SevenWonders{name: "Colosseum", country: " Italy"},
-      %SevenWonders{name: "Taj Mahal", country: " India"}
+      %SevenWonders{name: "Chichen Itza", country: "Mexico"},
+      %SevenWonders{name: "Colosseum", country: "Italy"},
+      %SevenWonders{name: "Taj Mahal", country: "India"}
     ]
   end
 
@@ -32,6 +34,7 @@ defmodule SevenWonders do
     |> Enum.each(fn %{name: name} -> IO.puts(name) end)
   end
 
+  @spec filter_country([t()], String.t()) :: [t()]
   def filter_country(wonders, country) do
     wonders
     |> Enum.filter(fn %{country: country_name} -> country_name == country end)
@@ -45,4 +48,12 @@ all_seven = SevenWonders.all()
 
 ```elixir
 SevenWonders.print_names(all_seven)
+```
+
+```elixir
+SevenWonders.filter_country(all_seven, "China")
+```
+
+```elixir
+SevenWonders.filter_country(all_seven, "Italy")
 ```
