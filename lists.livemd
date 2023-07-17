@@ -4,8 +4,9 @@
 
 ```elixir
 defmodule Lista do
+  # function's specification
+  @spec sum_simple(list(number())) :: number()
   def sum_simple([]), do: 0
-
   def sum_simple([h | t]), do: h + sum_simple(t)
 end
 
@@ -16,6 +17,7 @@ Lista.sum_simple([1, 2, 3])
 
 ```elixir
 defmodule ListRec do
+  @spec sum_tail_rec(list(number()), integer()) :: number()
   def sum_tail_rec(nums, acc \\ 0)
   def sum_tail_rec([], acc), do: acc
   def sum_tail_rec([h | t], acc), do: sum_tail_rec(t, acc + h)
@@ -23,3 +25,49 @@ end
 
 ListRec.sum_tail_rec([1, 2, 3])
 ```
+
+## Reversed List
+
+```elixir
+defmodule RevList do
+  def reverse(elements, acc \\ [])
+  def reverse([], acc), do: acc
+  def reverse([h | t], acc), do: reverse(t, [h | acc])
+end
+
+RevList.reverse([1, 2, 3])
+```
+
+## Maps
+
+```elixir
+defmodule MapThis do
+  def map(elements, func, acc \\ [])
+  def map([], _, acc), do: acc
+  def map([h | t], func, acc), do: map(t, func, [func.(h) | acc])
+end
+
+MapThis.map([1, 2, 3], fn x -> x * 2 end)
+```
+
+```elixir
+RevList.reverse(MapThis.map([1, 2, 3], fn x -> x * 2 end))
+```
+
+```elixir
+MapThis.map([1, 2, 3], fn x -> x * 2 end) |> RevList.reverse()
+```
+
+```elixir
+[1, 2, 3, 4] |> RevList.reverse()
+```
+
+```elixir
+[1, 2, 3, 4] |> MapThis.map(fn x -> x * 2 end) |> RevList.reverse()
+```
+
+```elixir
+[1, 2, 3, 4] |> MapThis.map(fn x -> x * 2 end) |> Enum.reverse()
+```
+
+## Section
