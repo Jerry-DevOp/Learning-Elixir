@@ -1,0 +1,73 @@
+# Stats Project
+
+## Section
+
+```elixir
+defmodule Stats do
+  alias StatsErrors
+  alias StatsValidator
+
+  def population_mean([]), do: StatsErrors.invalid_data_types()
+
+  def population_mean(nums) when is_list(nums) do
+    nums
+    |> StatsValidator.validate_num_list()
+    |> calc_population_mean()
+  end
+
+  def population_mean(_), do: StatsErrors.invalid_data_types()
+
+  @spec sample_mean([number()]) :: number() | {atom(), StatsErrors.t()}
+  def sample_mean(nums), do: population_mean(nums)
+
+  def calc_population_mean({false, _}), do: StatsErrors.invalid_data_types()
+
+  def calc_population_mean({true, nums}) do
+    nums
+    |> Enum.sum()
+    |> mean(Enum.count(nums))
+  end
+
+  def median(num_list) when is_list(num_list)
+
+  def mean(sigma, count), do: sigma / count
+end
+```
+
+## Stats errors
+
+```elixir
+defmodule StatsErrors do
+  @spec invalid_data_types() :: {atom(), String.t()}
+  def invalid_data_types(), do: {:error, "Invalid data type"}
+end
+```
+
+## Validator
+
+```elixir
+defmodule StatsValidator do
+  alias StatsErrors
+
+  @spec validate_num_list([number()]) :: {boolean(), [number()]}
+  def validate_num_list(nums) when is_list(nums) do
+    {Enum.all?(nums, fn el -> is_number(el) end), nums}
+  end
+
+  def validate_num_list(), do: StatsErrors.invalid_data_types()
+end
+```
+
+```elixir
+Stats.population_mean([10, 20, 30])
+```
+
+```elixir
+Stats.sample_mean([10, 20, 30])
+```
+
+```elixir
+defmodule StatsAPI do
+  alias Stats
+end
+```
