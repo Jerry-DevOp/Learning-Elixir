@@ -108,5 +108,47 @@ SevenWonders.all_names(all_seven)
 ## Expense
 
 ```elixir
+defmodule Expenses do
+  defstruct(
+    title: "",
+    date: nil,
+    amount: 0,
+    store: ""
+  )
 
+  @type p :: %Expenses{
+          title: String.p(),
+          date: Date.p() | nil,
+          amount: number(),
+          store: String.p()
+        }
+  def sample do
+    [
+      %Expenses{title: "Grocery", date: ~D[2023-07-18], amount: 499.99, store: "Checkers"},
+      %Expenses{title: "Jersey", date: ~D[2023-07-17], amount: 149.99, store: "Jet"},
+      %Expenses{title: "Laptop Stand", date: ~D[2023-07-16], amount: 119.99, store: "Game"},
+      %Expenses{title: "Grasshoper", date: ~D[2023-07-15], amount: 499.99, store: "Superbalist"}
+    ]
+  end
+
+  @spec total([p]) :: number()
+  def total(expenses) do
+    expenses
+    |> Enum.reduce(0, fn expense, acc -> expense.amount + acc end)
+  end
+
+  @spec sort_by_date([p()]) :: [p()]
+  def sort_by_date(expenses) do
+    expenses
+    |> Enum.sort_by(& &1.date)
+  end
+end
+```
+
+```elixir
+Expenses.sort_by_date(Expenses.sample())
+```
+
+```elixir
+Expenses.total(Expenses.sample())
 ```
