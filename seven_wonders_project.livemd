@@ -77,6 +77,8 @@ all_seven = SevenWonders.all()
 SevenWonders.print_names(all_seven)
 ```
 
+## Function to filter specific countries
+
 ```elixir
 SevenWonders.filter_country(all_seven, "China")
 ```
@@ -85,17 +87,27 @@ SevenWonders.filter_country(all_seven, "China")
 SevenWonders.filter_country(all_seven, "Italy")
 ```
 
+## Function to filter countries by the letter i
+
 ```elixir
 SevenWonders.in_countries_start_with_i(all_seven)
 ```
+
+## Function to sort countrie by length
+
+## Section
 
 ```elixir
 SevenWonders.sort_country_by_length(all_seven)
 ```
 
+## Function to create a list of coutries and seven wonders
+
 ```elixir
 SevenWonders.name_country_list(all_seven)
 ```
+
+## Function to create a keyword list
 
 ```elixir
 SevenWonders.country_name_keyword_lis(all_seven)
@@ -142,13 +154,74 @@ defmodule Expenses do
     expenses
     |> Enum.sort_by(& &1.date)
   end
+
+  @spec add_expense(p) :: [p()]
+  def add_expense(%Expenses{} = expense) do
+    [expense | sample()]
+  end
+
+  def update_amount(title, amount) do
+    [item] = Enum.filter(sample(), fn %{title: expense_title} -> expense_title == title end)
+    new_item = %{item | amount: amount}
+    [new_item | sample() |> List.delete(item)]
+  end
+
+  # users
+
+  @users ["Jerry", "DevOps", "Padawans", "Elixir"]
+  def authenticate(user) when user in @users, do: {:ok, "Authorized"}
+  def authenticate(_), do: {:error, "Unathorized"}
+
+  def verify_password(user, _password) when user in @users, do: {:ok, "password verified"}
+  def verify_password(_user, _password), do: {:error, "wrong password"}
+
+  def login(user, password) do
+    with {:ok, _auth_msg} <- authenticate(user),
+         {:ok, _msg} <- verify_password(user, password) do
+      {:ok, "#{user} successfully logged in"}
+    else
+      {:error, msg} -> {:error, msg}
+      _ -> :Unauthorized
+    end
+  end
 end
 ```
+
+## Section
 
 ```elixir
 Expenses.sort_by_date(Expenses.sample())
 ```
 
+## function to sort by date
+
 ```elixir
 Expenses.total(Expenses.sample())
+```
+
+## Function to add Expenses
+
+```elixir
+Expenses.add_expense(%Expenses{
+  title: "Coffe",
+  date: ~D[2023-07-14],
+  amount: 32.99,
+  store: "Magg and Beans"
+})
+```
+
+## Function to update expense amount
+
+```elixir
+Expenses.update_amount("Laptop Stand", 99.99)
+```
+
+## Login Verification Function
+
+```elixir
+Expenses.login("Jerry", 1234)
+```
+
+```elixir
+Expenses.login("Erlang", 1234)
 ```
