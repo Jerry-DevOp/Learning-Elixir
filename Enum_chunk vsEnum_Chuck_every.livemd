@@ -1,0 +1,336 @@
+# Chunk Vs Chunk_every A blog Review by Jerry & Sipho
+
+## Enum.Chunk Code
+
+```elixir
+defmodule Identicon.Image do
+  defstruct hex: nil, color: nil, grid: nil, pixel_map: nil
+end
+
+defmodule Identicon do
+  def main(input) do
+    input
+    |> hash_input
+    |> pick_color
+    |> build_grid
+
+    # |> filter_odd_squares
+    # |> build_pixel_map
+    # |> draw_image
+    # |> save_image(input)
+  end
+
+  def save_image(image, input) do
+    File.write("#{input}.png", image)
+  end
+
+  def draw_image(%Identicon.Image{color: color, pixel_map: pixel_map}) do
+    image = :egd.create(250, 250)
+    fill = :egd.color(color)
+
+    Enum.each(pixel_map, fn {start, stop} ->
+      :egd.filledRectangle(image, start, stop, fill)
+    end)
+
+    :egd.render(image)
+  end
+
+  def build_pixel_map(%Identicon.Image{grid: grid} = image) do
+    pixel_map =
+      Enum.map(grid, fn {_code, index} ->
+        horizontal = rem(index, 5) * 50
+        vertical = div(index, 5) * 50
+
+        top_left = {horizontal, vertical}
+        bottom_right = {horizontal + 50, vertical + 50}
+        {top_left, bottom_right}
+      end)
+
+    %Identicon.Image{image | pixel_map: pixel_map}
+  end
+
+  def filter_odd_squares(%Identicon.Image{grid: grid} = image) do
+    grid =
+      Enum.filter(grid, fn {code, _index} ->
+        rem(code, 2) == 0
+      end)
+
+    %Identicon.Image{image | grid: grid}
+  end
+
+  def build_grid(%Identicon.Image{hex: hex} = image) do
+    grid =
+      hex
+      |> Enum.chunk(3)
+
+    # |> Enum.map(&mirror_row/1)
+    # |> List.flatten
+    # |> Enum.with_index
+
+    %Identicon.Image{image | grid: grid}
+  end
+
+  def mirror_row(row) do
+    # [145, 46, 200] -> [145. 46, 200, 145, 46, 200]
+    [first, second | _tail] = row
+    row ++ [second, first]
+  end
+
+  def pick_color(%Identicon.Image{hex: [r, g, b | _tail]} = image) do
+    %Identicon.Image{image | color: {r, g, b}}
+  end
+
+  @spec hash_input(any) :: %Identicon.Image{hex: [byte]}
+  def hash_input(input) do
+    hex =
+      :crypto.hash(:md5, input)
+      |> :binary.bin_to_list()
+
+    %Identicon.Image{hex: hex}
+  end
+end
+```
+
+```elixir
+Identicon.main("qwer")
+```
+
+## Enum.chunk_every code (with leftover)
+
+```elixir
+defmodule Identicon1.Image do
+  defstruct hex: nil, color: nil, grid: nil, pixel_map: nil
+end
+
+defmodule Identicon1 do
+  def main(input) do
+    input
+    |> hash_input
+    |> pick_color
+    |> build_grid
+
+    # |> filter_odd_squares
+    # |> build_pixel_map
+    # |> draw_image
+    # |> save_image(input)
+  end
+
+  def save_image(image, input) do
+    File.write("#{input}.png", image)
+  end
+
+  def draw_image(%Identicon1.Image{color: color, pixel_map: pixel_map}) do
+    image = :egd.create(250, 250)
+    fill = :egd.color(color)
+
+    Enum.each(pixel_map, fn {start, stop} ->
+      :egd.filledRectangle(image, start, stop, fill)
+    end)
+
+    :egd.render(image)
+  end
+
+  def build_pixel_map(%Identicon1.Image{grid: grid} = image) do
+    pixel_map =
+      Enum.map(grid, fn {_code, index} ->
+        horizontal = rem(index, 5) * 50
+        vertical = div(index, 5) * 50
+
+        top_left = {horizontal, vertical}
+        bottom_right = {horizontal + 50, vertical + 50}
+        {top_left, bottom_right}
+      end)
+
+    %Identicon1.Image{image | pixel_map: pixel_map}
+  end
+
+  def filter_odd_squares(%Identicon1.Image{grid: grid} = image) do
+    grid =
+      Enum.filter(grid, fn {code, _index} ->
+        rem(code, 2) == 0
+      end)
+
+    %Identicon1.Image{image | grid: grid}
+  end
+
+  def build_grid(%Identicon1.Image{hex: hex} = image) do
+    grid =
+      hex
+      |> Enum.chunk_every(3)
+
+    # |> Enum.map(&mirror_row/1)
+    # |> List.flatten
+    # |> Enum.with_index
+
+    %Identicon1.Image{image | grid: grid}
+  end
+
+  def mirror_row(row) do
+    # [145, 46, 200] -> [145. 46, 200, 145, 46, 200]
+    [first, second | _tail] = row
+    row ++ [second, first]
+  end
+
+  def pick_color(%Identicon1.Image{hex: [r, g, b | _tail]} = image) do
+    %Identicon1.Image{image | color: {r, g, b}}
+  end
+
+  @spec hash_input(any) :: %Identicon1.Image{hex: [byte]}
+  def hash_input(input) do
+    hex =
+      :crypto.hash(:md5, input)
+      |> :binary.bin_to_list()
+
+    %Identicon1.Image{hex: hex}
+  end
+end
+```
+
+```elixir
+
+```
+
+## Enum.Chunk_every( without leftovers)
+
+```elixir
+defmodule Identicon2.Image do
+  defstruct hex: nil, color: nil, grid: nil, pixel_map: nil
+end
+
+defmodule Identicon2 do
+  def main(input) do
+    input
+    |> hash_input
+    |> pick_color
+    |> build_grid
+
+    # |> filter_odd_squares
+    # |> build_pixel_map
+    # |> draw_image
+    # |> save_image(input)
+  end
+
+  def save_image(image, input) do
+    File.write("#{input}.png", image)
+  end
+
+  def draw_image(%Identicon2.Image{color: color, pixel_map: pixel_map}) do
+    image = :egd.create(250, 250)
+    fill = :egd.color(color)
+
+    Enum.each(pixel_map, fn {start, stop} ->
+      :egd.filledRectangle(image, start, stop, fill)
+    end)
+
+    :egd.render(image)
+  end
+
+  def build_pixel_map(%Identicon2.Image{grid: grid} = image) do
+    pixel_map =
+      Enum.map(grid, fn {_code, index} ->
+        horizontal = rem(index, 5) * 50
+        vertical = div(index, 5) * 50
+
+        top_left = {horizontal, vertical}
+        bottom_right = {horizontal + 50, vertical + 50}
+        {top_left, bottom_right}
+      end)
+
+    %Identicon2.Image{image | pixel_map: pixel_map}
+  end
+
+  def filter_odd_squares(%Identicon2.Image{grid: grid} = image) do
+    grid =
+      Enum.filter(grid, fn {code, _index} ->
+        rem(code, 2) == 0
+      end)
+
+    %Identicon2.Image{image | grid: grid}
+  end
+
+  def build_grid(%Identicon2.Image{hex: hex} = image) do
+    grid =
+      hex
+      |> Enum.chunk_every(3, 3, :discard)
+
+    # |> Enum.map(&mirror_row/1)
+    # |> List.flatten
+    # |> Enum.with_index
+
+    %Identicon2.Image{image | grid: grid}
+  end
+
+  def mirror_row(row) do
+    # [145, 46, 200] -> [145. 46, 200, 145, 46, 200]
+    [first, second | _tail] = row
+    row ++ [second, first]
+  end
+
+  def pick_color(%Identicon2.Image{hex: [r, g, b | _tail]} = image) do
+    %Identicon2.Image{image | color: {r, g, b}}
+  end
+
+  @spec hash_input(any) :: %Identicon2.Image{hex: [byte]}
+  def hash_input(input) do
+    hex =
+      :crypto.hash(:md5, input)
+      |> :binary.bin_to_list()
+
+    %Identicon2.Image{hex: hex}
+  end
+end
+```
+
+## Chunk_Every
+
+hex
+
+|> Enum.check_every(3)
+
+```elixir
+Identicon1.main("qwer")
+```
+
+## Chunk
+
+hex
+
+|> Enum.chunk(3)
+
+```elixir
+Identicon.main("qwer")
+```
+
+The visible difference between chunk and chunk_every, lies on how they handle the outlier, or the remaining numbers that cannot be grouped into a list ( of three variables in this instance).
+
+Chunk which is depricated ( which means no longer in support) automatically removes the outlier,which in this case is a "7"
+
+source = "https://github.com/StephenGrider/ElixirCode/issues/3"
+
+While Chunk_Every keeps the outlier in the list.
+
+To understand how you can get the same results using chunk_every you need to understand how it works.
+
+Enum.Chunk_every ( enumerable, count, step, leftover \\ [])
+
+This means chunk takes in a enumerable, count, step and a leftover.
+
+To remove the outlier,  leftover = :discard
+
+Your Outcome would be.
+
+Enum.Chunk_every (hex,3, 3, :discard)
+
+To understand how each input does click on the link below.
+
+source = "https://superruzafa.github.io/visual-elixir-reference/Enum/chunk_every/4/"
+
+## Chunk_Every Results with ":discard"
+
+hex
+
+|> Enum.chunk_every(3,3, :discard)
+
+```elixir
+Identicon2.main("qwer")
+```
