@@ -7,7 +7,7 @@ Enum.chunk is a depracted function in elixir 1.15.2
 This means the function is available in the current version of elixir but it is not recommended to use it 
 (https://www.baeldung.com/cs/deprecated-vs-obsolete#:~:text=The%20term%20deprecated%20refers%20to,or%20updated%20with%20newer%20versions.).
 
-Enum.chunk takes two arguments the enumerable and the count and it returns a nested list and discard the outlier automatically.
+Enum.chunk takes two arguments the enumerable and the count, then it returns a nested list and it discards the outlier automatically.
 Enum.chunk(Enumrable, Count)
 
 ```elixir
@@ -16,7 +16,7 @@ Enum.chunk([1, 2, 3, 4, 5], 2)
 
 ## Enum.chunk_every
 
-Enum.chunk_every is a function in elixir that takes a list and creates nested list.
+Enum.chunk_every is a function in elixir that takes a list and creates a nested list.
 
 Enum.chunk_every has added functionality compared to Enum.chunk
 Enum.chunk_every has 4 arguments an enumrable, count, step and leftover.
