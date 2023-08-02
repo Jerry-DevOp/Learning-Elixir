@@ -1,0 +1,29 @@
+# Logger and alias
+
+## Section
+
+```elixir
+import Logger
+
+defmodule Jerry do
+  defmodule Num do
+    def take() do
+      alias Math.List, as: List
+      "hello"
+    end
+  end
+
+  def sum do
+    var = [1, 2, 3, 4]
+    np = Enum.sum(var)
+    # info("Hello Jerry")
+
+    info("sum is #{np}")
+    # Num.take()
+  end
+end
+
+import Enum
+var = [1, 2, 3, 4]
+take
+```

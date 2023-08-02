@@ -1,0 +1,75 @@
+# Alias , Import and Require
+
+## Alias
+
+Aliases are frequently used to define shortcuts. In fact, calling alias without an :as option sets the alias automatically to the last part of the module name(https://elixir-lang.org/getting-started/alias-require-and-import.html).
+
+```elixir
+defmodule Num.Za do
+  def take do
+    "Hi my name is take"
+  end
+end
+
+alias Num.Za
+alias Num.Za, as: Nz
+```
+
+The first alias allows you to call a funtion from the module "Num.Za"
+
+by using Za dot the function name instead of the full module name
+
+```elixir
+Za.take()
+```
+
+The Second Alias allows you to call a function from module "Num.Za" by the name you gave it, in this case NZ dot the function name.
+This part of the alias allows you to do that. ", as: Nz(custom name)"
+
+```elixir
+Nz.take()
+```
+
+## Import
+
+Import allows you to call functions of a module without calling the name of the module(https://elixir-lang.org/getting-started/alias-require-and-import.html).
+
+```elixir
+defmodule Cars do
+  def status do
+    "broken"
+  end
+end
+
+defmodule Service do
+  import Cars
+
+  def outcome do
+    if status() == "broken" do
+      "Servicing"
+    else
+      "car already serviced"
+    end
+  end
+end
+```
+
+```elixir
+Service.outcome()
+```
+
+## Require
+
+```elixir
+defmodule Cook do
+  defmodule Menu do
+    def dish do
+      "Chickin tikka"
+    end
+  end
+
+  defp serving do
+    "today we are serving #{Menu.dish()}"
+  end
+end
+```

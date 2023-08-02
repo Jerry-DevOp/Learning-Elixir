@@ -1,0 +1,148 @@
+# Elixir Hacks
+
+## Data Types
+
+## 1. String " "
+
+```elixir
+"hello"
+```
+
+```elixir
+"hello" <> " " <> "Jerry"
+```
+
+## 2.Atom :
+
+```elixir
+:ok
+```
+
+## 3. Integer (whole number)
+
+```elixir
+var = 2
+is_integer(var)
+```
+
+```elixir
+var + 2
+```
+
+## 4. float
+
+```elixir
+flt = 2.76
+is_float(flt)
+```
+
+## 5. Boolean
+
+```elixir
+bln = true
+is_boolean(bln)
+```
+
+## Data Structures
+
+## 1.List[]
+
+```elixir
+list1 = [1, 2, 3]
+list2 = [10, 20]
+```
+
+```elixir
+list3 = list1 ++ list2
+```
+
+```elixir
+new = 0
+list4 = [new | list1]
+```
+
+## 2.Charlist ' '
+
+
+
+```elixir
+'abc'
+```
+
+```elixir
+'abc' ++ 'def'
+```
+
+## 3.Tuple{}
+
+```elixir
+{[1, 2, 3], "Hello", 4, :ok}
+```
+
+## 4. Maps %{}
+
+```elixir
+colors = %{primary: "red"}
+```
+
+```elixir
+another = %{"hello" => :alright, 4 => "four"}
+```
+
+How to access values in a map
+
+```elixir
+colors.primary
+```
+
+```elixir
+another["hello"]
+```
+
+How to create a new map from an existing map
+
+```elixir
+colors = %{primary: "red"}
+map1 = Map.put(colors, :primary, "blue")
+```
+
+## 5.Keywordlist= [{atom, value}] / [atom: value]
+
+```elixir
+keywl = [{:alright, "Hello"}]
+```
+
+```elixir
+keywl == [alright: "Hello"]
+```
+
+How to extract the value of the key
+
+```elixir
+keywl[:alright]
+```
+
+## Conditional Statements
+
+## 1. If/else statement
+
+```elixir
+x = 0
+
+if x == 1 do
+  "its a match"
+else
+  "its not a match"
+end
+```
+
+## 2. Case Statement
+
+```elixir
+x = 0
+
+case x do
+  1 -> "its a match"
+  _ -> "its not a match"
+end
+```

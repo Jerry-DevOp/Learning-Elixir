@@ -259,13 +259,13 @@ rest3
 # char value use single qoutation
 # marks
 # Charlist is a list
-char = 'Hello'
+char = ~c"Hello"
 ```
 
 ```elixir
 # adding two list together
 # use ++
-chars = char ++ ' Jerry'
+chars = char ++ ~c" Jerry"
 chars
 ```
 

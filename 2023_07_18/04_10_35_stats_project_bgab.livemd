@@ -1,7 +1,0 @@
-# Stats Project
-
-## Section
-
-```elixir
-
-```

@@ -1,7 +1,0 @@
-# Elixir And Phoenix BootCamp
-
-## Section
-
-```elixir
-
-```
